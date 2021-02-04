@@ -1,3 +1,23 @@
+tomcat : apache-tomcat-5.5.26
+mysql : 8.0
+mysql-connector/j : 5.1.49-bin.jar
+fosstrak-epcis : 0.5.0
+jdk : "1.8.0_41"
+---------------------------------------------------------------------
+apache-tomcat-5.5.26/common/lib 에 mysql-connector-java-5.1.49-bin.jar 파일 넣기
+apache-tomcat-5.5.26/webapps 에 epcis-repository-0.5.0.war 파일 넣기
+--------------------------------------------------------------------
+mysql 설정 :
+create database epcis;
+create user 'epcis'@'%' identified by 'epcis';
+grant all privileges on *.* to 'epcis'@'%' with grant option;
+source <path-to-unpacked-download>/epcis_schema.sql
+만약 username , password 비밀번호 다르다면 $Tomcat_home/conf/catalina/localhost/epcis-repository-<version>.xml 에서 변경 가능(되도록이면 변경하지않기)
+---------------------------------------------------------------------
+$tomcat_home/bin/startup.bat 으로 실행(localhost:8080 접속 가능)
+http://localhost:8080/epcis-repository-<version>/capture - 캡쳐(이 url 로 xml body 포스트요청 보내기)
+
+
 ---------------------
 Project Configuration
 ---------------------
